@@ -52,11 +52,13 @@ class Item
      */
     private $category;
 
-//    /**
-//     * @var string
-//     * @ORM\Column(name="status", type="string", nullable=false)
-//     */
-//    private $status;
+
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="status", type="boolean", default=true)
+     */
+    private $status;
 
     /**
      * @var \DateTime
