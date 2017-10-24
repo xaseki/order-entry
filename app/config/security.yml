@@ -6,8 +6,9 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_STAFF:       [ROLE_MEMBER_A]
+        ROLE_ADMIN:       [ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -20,6 +21,25 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+#
+#        admin:
+#            pattern: ^/admin
+#            form_login:
+#                provider: order_entry_admin
+#                login_path: admin_login
+#                check_path: admin_login_check
+#                # ユーザ名とパスワードのフィールド名
+#                username_parameter: "ashioku_admin_login[username]"
+#                password_parameter: "ashioku_admin_login[password]"
+#
+#                # csrf トークンのオプション
+#                csrf_parameter: "ashioku_admin_login[_token]"
+#                csrf_token_generator: security.csrf.token_manager
+#
+#            logout:
+#                path: admin_logout
+#                target: /admin/
+#            anonymous:    true
 
         main:
             pattern: ^/
