@@ -61,5 +61,6 @@
 # Embedded web-server pid file
 /.web-server-pid
 
+git
 .idea/
-/nbproject/private/
+nbproject/
