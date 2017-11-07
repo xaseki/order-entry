@@ -28,13 +28,14 @@ class RegistrationFormType extends AbstractType
         return 'FOS\UserBundle\Form\Type\RegistrationFormType';
     }
     
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 
     public function getBlockPrefix()
     {
-        return 'order_entry_user_registration';
+        return 'app_user_registration';
+    }
+
+    public function getName()
+    {
+        return $this->getBlockPrefix();
     }
 }

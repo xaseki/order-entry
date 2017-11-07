@@ -78,10 +78,10 @@ fos_user:
     from_email:
         address: noreply@example.com
         sender_name: Demo App
-#
-#    registration:
-#        form:
-#            type: OrderEntry\Bundle\UserBundle\Form\RegistrationFormType
+
+    registration:
+        form:
+            type: OrderEntry\Bundle\UserBundle\Form\RegistrationFormType
 
 stof_doctrine_extensions:
     orm:
