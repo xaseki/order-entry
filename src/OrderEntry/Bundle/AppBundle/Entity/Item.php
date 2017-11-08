@@ -13,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Class Item
+ * @package OrderEntry\Bundle\AppBundle\Entity
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="OrderEntry\Bundle\AppBundle\Repository\ItemRepository")
+ *
+ */
 class Item
 {
     /**
@@ -56,7 +63,7 @@ class Item
 
     /**
      * @var boolean
-     * @ORM\Column(name="status", type="boolean", default=true)
+     * @ORM\Column(name="status", type="boolean", options={"default":true})
      */
     private $status;
 
