@@ -83,6 +83,9 @@ fos_user:
         form:
             type: OrderEntry\Bundle\UserBundle\Form\RegistrationFormType
 
+        confirmation:
+            enabled: true
+
 stof_doctrine_extensions:
     orm:
         default:
