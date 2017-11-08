@@ -52,7 +52,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string")
      * @Assert\NotBlank(
      *     message="お名前を入力してください",
      *     groups={"Registration", "Profile"}

@@ -22,14 +22,20 @@ class RegistrationFormType extends AbstractType
                 'label' => '役職',
             ));
     }
+    
+    public function getParent()
+    {
+        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+    }
+    
+
+    public function getBlockPrefix()
+    {
+        return 'app_user_registration';
+    }
 
     public function getName()
     {
         return $this->getBlockPrefix();
-    }
-
-    public function getBlockPrefix()
-    {
-        return 'order_entry_user_registration';
     }
 }
