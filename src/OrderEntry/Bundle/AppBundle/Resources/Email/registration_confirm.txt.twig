@@ -1,0 +1,23 @@
+{% use 'XeartsAshiokuUserBundle:Email:base.txt.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}{% autoescape false %}[足オク] 仮登録完了{% endautoescape %}{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+
+足オクへの会員登録のお申し込みありがとうございます。
+
+下記のURLをクリックして登録処理を完了させてください。
+
+{{ confirmationUrl }}
+
+
+--------------------
+このメールは足オクに登録をお申し込みされた方にお送りしています。
+
+足オク
+https://ashioku.com/
+
+
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

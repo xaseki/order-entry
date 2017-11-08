@@ -1,0 +1,16 @@
+{#件名#}
+{% block subject %}{% autoescape false %}Subject{% endautoescape %}{% endblock %}
+{#From#}
+{% block from_address %}{% autoescape false %}noleplay@ashioku.com{% endautoescape %}{% endblock from_address %}
+{#To#}
+{% block to_address %}{% autoescape false %}{% endautoescape %}{% endblock to_address %}
+{#Bcc#}
+{% block bcc_address %}{% autoescape false %}info@ashioku.com{% endautoescape %}{% endblock %}
+{#本文#}
+{% block body_text %}
+{% autoescape false %}
+    email body
+{% endautoescape %}
+{% endblock %}
+{#HTMLメール本文#}
+{% block body_html %}{% endblock %}
