@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63f4d79a-90b6-47dc-97b5-0ddbe54ba68d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OrderEntry/Bundle/AdminBundle/Entity/Admin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Resources/Email/base.txt.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Resources/Email/registration_confirm.txt.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Resources/Email/resetting.txt.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Entity/Item.php" afterPath="$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Entity/Item.php" />
@@ -35,10 +30,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
+            <state relative-caret-position="360">
               <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding />
             </state>
@@ -103,10 +98,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Item.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Item.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Entity/Item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
+            <state relative-caret-position="540">
               <caret line="65" column="74" lean-forward="false" selection-start-line="65" selection-start-column="74" selection-end-line="65" selection-end-column="74" />
               <folding />
             </state>
@@ -655,12 +650,12 @@
       <workItem from="1508897609976" duration="223000" />
       <workItem from="1508898212998" duration="94000" />
       <workItem from="1509437761508" duration="11435000" />
-      <workItem from="1510104618097" duration="5509000" />
+      <workItem from="1510104618097" duration="5583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42403000" />
+    <option name="totallyTimeSpent" value="42477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="23" width="1826" height="999" extended-state="0" />
@@ -991,14 +986,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Resources/Email/base.txt.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1095,8 +1082,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OrderEntry/Bundle/AppBundle/Entity/Item.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
+        <state relative-caret-position="540">
           <caret line="65" column="74" lean-forward="false" selection-start-line="65" selection-start-column="74" selection-end-line="65" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding />
         </state>
       </provider>
