@@ -11,10 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Item
  * @package OrderEntry\Bundle\AppBundle\Entity
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="OrderEntry\Bundle\AppBundle\Repository\ItemRepository")
+ * @ORM\Entity(repositoryClass="OrderEntry\Bundle\AppBundle\Repository\ItemCategoryRepository")
  *
  */
-class Item
+class ItemCategory
 {
     /**
      * @var integer
@@ -32,20 +32,6 @@ class Item
      * )
      */
     private $name;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="ItemCategory")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     */
-    private $categories;
-    /**
-     * @var integer
-     * @ORM\Column(name="price", type="integer", nullable=false)
-     * @Assert\NotBlank(
-     *     message="金額を入力してください"
-     * )
-     */
-    private $price;
 
     /**
      * @var \DateTime
@@ -100,49 +86,13 @@ class Item
     /**
      * @return mixed
      */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * @param mixed $categories
-     * @return $this
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param int $price
-     * @return $this
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
     public function getCreated()
     {
         return $this->created;
     }
 
     /**
-     * @param \DateTime $created
+     * @param mixed $created
      * @return $this
      */
     public function setCreated($created)
@@ -168,7 +118,5 @@ class Item
         $this->updated = $updated;
         return $this;
     }
-
-
 
 }
