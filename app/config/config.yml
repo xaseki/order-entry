@@ -81,7 +81,7 @@ fos_user:
 
     registration:
         form:
-            type: OrderEntry\Bundle\UserBundle\Form\RegistrationFormType
+            type: OrderEntry\Bundle\UserBundle\Form\Type\RegistrationFormType
 
         confirmation:
             enabled: true
