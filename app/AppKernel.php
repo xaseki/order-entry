@@ -21,6 +21,8 @@ class AppKernel extends Kernel
             new OrderEntry\Bundle\AdminBundle\AdminBundle(),
             new OrderEntry\Bundle\WebBundle\WebBundle(),
             new OrderEntry\Bundle\UserBundle\UserBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle(),
+            new JMS\AopBundle\JMSAopBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
