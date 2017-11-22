@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class User
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="OrderEntry\Bundle\AppBundle\Repository\UserRepository")
  */
 class User extends BaseUser
@@ -53,16 +53,16 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank(
-     *     message="お名前を入力してください",
+     *     message="役職を入力してください",
      *     groups={"Registration", "Profile"}
      * )
      * @Assert\Length(
      *     min="1",
-     *     minMessage="お名前が短すぎます",
+     *     minMessage="役職名が短すぎます",
      *     max="255",
-     *     maxMessage="お名前は{{ limit }}文字以内で入力してください",
+     *     maxMessage="役職は{{ limit }}文字以内で入力してください",
      *     groups={"Registration", "Profile"}
      * )
      */
