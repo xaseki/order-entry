@@ -1,5 +1,5 @@
 <?php
-namespace OrderEntry\Bundle\UserBundle\Type\Form;
+namespace OrderEntry\Bundle\UserBundle\Form\Type;
 
 use OrderEntry\Bundle\AppBundle\Entity\Item;
 use Symfony\Component\Form\AbstractType;
