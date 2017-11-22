@@ -1,9 +1,11 @@
 <?php
-namespace OrderEntry\Bundle\UserBundle\Form;
+namespace OrderEntry\Bundle\UserBundle\Form\Type;
 
+use OrderEntry\Bundle\AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationFormType extends AbstractType
 {
@@ -22,16 +24,21 @@ class RegistrationFormType extends AbstractType
                 'label' => '役職',
             ));
     }
-    
-    public function getParent()
+
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+        $resolver->setDefaults(array(
+            'data_class' => User::class,
+            'csrf_token_id' => 'registration',
+            'intention'  => 'registration',
+            'attr'=>array('novalidate'=>'novalidate'),
+        ));
     }
     
 
     public function getBlockPrefix()
     {
-        return 'app_user_registration';
+        return 'order_entry_user_registration';
     }
 
     public function getName()
