@@ -8,18 +8,37 @@
  */
 namespace OrderEntry\Bundle\AdminBundle\Entity;
 
-use OrderEntry\Bundle\AppBundle\Entity\User;
+use FOS\UserBundle\Model\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
- * Class Admin
+ * Admin
  *
- * @package OrderEntry\Bundle\AdminBundle\Entity
  * @ORM\Table()
  * @ORM\Entity
- *
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="emailCanonical",
+ *          column=@ORM\Column(
+ *              name = "email_canonical",
+ *              unique = false
+ *          )
+ *      ),
+ *      @ORM\AttributeOverride(name="username",
+ *          column=@ORM\Column(
+ *              name = "username",
+ *              unique = true
+ *          )
+ *      ),
+ *      @ORM\AttributeOverride(name="usernameCanonical",
+ *          column=@ORM\Column(
+ *              name = "username_canonical",
+ *              unique = false
+ *          )
+ *      )
+ * })
  */
 class Admin extends User
 {
@@ -50,13 +69,16 @@ class Admin extends User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="modified_at", type="datetime", nullable=true)
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="update")
      */
-    private $modifiedAt;
+    private $updatedAt;
+
 
     /**
-     * @return int
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -64,6 +86,22 @@ class Admin extends User
     }
 
     /**
+     * Set username
+     *
+     * @param string $name
+     *
+     * @return Admin
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
      * @return string
      */
     public function getName()
@@ -72,50 +110,19 @@ class Admin extends User
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @ORM\PrePersist
      */
-    public function setName($name)
+    public function prePersist()
     {
-        $this->name = $name;
-        return $this;
+        $this->createdAt = new \DateTime();
+        $this->modifiedAt = new \DateTime();
     }
 
     /**
-     * @return \DateTime
+     * @ORM\PreUpdate
      */
-    public function getCreatedAt()
+    public function preUpdated()
     {
-        return $this->createdAt;
+        $this->updatedAt = new \DateTime();
     }
-
-    /**
-     * @param \DateTime $createdAt
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getModifiedAt()
-    {
-        return $this->modifiedAt;
-    }
-
-    /**
-     * @param \DateTime $modifiedAt
-     * @return $this
-     */
-    public function setModifiedAt($modifiedAt)
-    {
-        $this->modifiedAt = $modifiedAt;
-        return $this;
-    }
-
-
 }
