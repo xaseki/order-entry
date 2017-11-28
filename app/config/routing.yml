@@ -4,7 +4,7 @@ user:
     prefix:   /
 
 web:
-    resource: "@WebBundle/Controller/"
+    resource: "@WebBundle/Controller"
     type:     annotation
     prefix:   /
 

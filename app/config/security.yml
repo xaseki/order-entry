@@ -15,7 +15,7 @@ security:
         fos_userbundle:
             id: fos_user.user_provider.username_email
         order_entry_admin:
-            id: order_entry.bundle.admin_bundle.security.admin_user_manager
+            id: order_entry.bundle.admin_bundle.security.admin_user_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -36,6 +36,9 @@ security:
                 # csrf トークンのオプション
                 csrf_parameter: "order_entry_admin_login[_token]"
                 csrf_token_generator: security.csrf.token_manager
+
+                default_target_path: orderentry_admin_default_index
+                always_use_default_target_path: true
 
             logout:
                 path: admin_logout
