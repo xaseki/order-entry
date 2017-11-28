@@ -90,3 +90,16 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+
+jms_di_extra:
+    locations:
+        all_bundles: false
+        bundles: [OrderEntryUserBundle, OrderEntryAppBundle, OrderEntryAdminBundle, OrderEntryWebBundle]
+        directories: ["%kernel.root_dir%/../src"]
+
+assetic:
+    debug: "%kernel.debug%"
+    use_controller: "%kernel.debug%"
+    bundles: [ AdminBundle, UserBundle, WebBundle ]
+    filters:
+        cssrewrite: ~

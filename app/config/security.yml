@@ -6,40 +6,44 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_STAFF:       [ROLE_MEMBER_A]
-        ROLE_ADMIN:       [ROLE_USER]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+        ROLE_STAFF: [ROLE_MEMBER_A]
+        ROLE_ADMIN: [ROLE_USER, ROLE_STAFF]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
-
+            id: fos_user.user_provider.username_email
+        order_entry_admin:
+            id: order_entry.bundle.admin_bundle.security.admin_user_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-#
-#        admin:
-#            pattern: ^/admin
-#            form_login:
-#                provider: order_entry_admin
-#                login_path: admin_login
-#                check_path: admin_login_check
-#                # ユーザ名とパスワードのフィールド名
-#                username_parameter: "ashioku_admin_login[username]"
-#                password_parameter: "ashioku_admin_login[password]"
-#
-#                # csrf トークンのオプション
-#                csrf_parameter: "ashioku_admin_login[_token]"
-#                csrf_token_generator: security.csrf.token_manager
-#
-#            logout:
-#                path: admin_logout
-#                target: /admin/
-#            anonymous:    true
+
+        admin:
+            pattern: ^/admin
+            form_login:
+                provider: order_entry_admin
+                login_path: admin_login
+                check_path: admin_login_check
+                # ユーザ名とパスワードのフィールド名
+                username_parameter: "order_entry_admin_login[username]"
+                password_parameter: "order_entry_admin_login[password]"
+
+                # csrf トークンのオプション
+                csrf_parameter: "order_entry_admin_login[_token]"
+                csrf_token_generator: security.csrf.token_manager
+
+                default_target_path: orderentry_admin_default_index
+                always_use_default_target_path: true
+
+            logout:
+                path: admin_logout
+                target: /admin/
+            anonymous:    true
 
         main:
             pattern: ^/
@@ -64,4 +68,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_MEMBER_A }
