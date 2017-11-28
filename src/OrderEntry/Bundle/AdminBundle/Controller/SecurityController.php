@@ -9,8 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
-use OrderEntry\Bundle\AdminBundle\Form\Type\AdminLoginFormType;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use OrderEntry\Bundle\AdminBundle\Form\Type\LoginFormType;
 
 /**
  * Class SecurityController
@@ -18,15 +17,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class SecurityController extends Controller
 {
-    /** @var AuthorizationCheckerInterface $authorizationChecker */
-    private $authorizationChecker;
-
-
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
-    {
-        $this->authorizationChecker = $authorizationChecker;
-    }
-
     /**
      * @Route("/login", name="admin_login")
      * @Template()
@@ -34,7 +24,7 @@ class SecurityController extends Controller
     public function loginAction(Request $request)
     {
 
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return $this->redirect($this->generateUrl('orderentry_admin_default_index'));
         }
 
@@ -48,13 +38,14 @@ class SecurityController extends Controller
             $error = null;
         }
 
-        $form = $this->createForm(AdminLoginFormType::class);
+        $form = $this->createForm(LoginFormType::class);
 
         return[
           'error' => $error,
           'form' => $form->createView(),
         ];
     }
+
 
     /**
      * @Route("/login_check", name="admin_login_check")

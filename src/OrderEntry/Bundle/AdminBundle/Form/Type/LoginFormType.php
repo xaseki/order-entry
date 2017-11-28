@@ -9,7 +9,7 @@ use  Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdminLoginFormType extends AbstractType
+class LoginFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -44,7 +44,6 @@ class AdminLoginFormType extends AbstractType
     {
         $resolver->setDefaults(array(
             'csrf_token_id' => 'authenticate',
-            'data_class' => Admin::class,
         ));
     }
 
