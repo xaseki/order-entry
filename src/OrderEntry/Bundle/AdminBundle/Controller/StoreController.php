@@ -3,8 +3,9 @@
 namespace OrderEntry\Bundle\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use OrderEntry\Bundle\AppBundle\Entity\Store;
 use OrderEntry\Bundle\AppBundle\Repository\ItemRepository;
-use OrderEntry\Bundle\AdminBundle\Form\Type\ItemFormType;
+use OrderEntry\Bundle\AppBundle\Repository\StoreRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,11 +13,11 @@ use OrderEntry\Bundle\AppBundle\Entity\Item;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 /**
- * Class Item
+ * Class Store
  * @package OrderEntry\Bundle\AdminBundle\Controller
- * @Route("/item")
+ * @Route("/store")
  */
-class ItemController extends Controller
+class StoreController extends Controller
 {
     /**
      * @Route("/")
@@ -24,26 +25,16 @@ class ItemController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $qb = $this->getItemRepository()->createQueryBuilder('i')
+        $qb = $this->getStoreRepository()->createQueryBuilder('s')
             ->orderBy('id', 'desc');
 
-        $keyword = $request->get('q', '');
-        if ($keyword) {
-            $qb->leftJoin('i.category', 'c')
-                ->where($qb->expr()->orX(
-                    $qb->expr()->like('i.name', ':keyword'),
-                    $qb->expr()->like('i.price', ':keyword'),
-                    $qb->expr()->like('c.name', ':keyword')
-                ))->setParameter('keyword', '%' . $keyword .  '%');
-        }
 
-        $item = $qb->getQuery()->getResult();
+        $store = $qb->getQuery()->getResult();
 
 
 
         return [
-            'item' => $item,
-            'keyword' => $keyword,
+            'store' => $store
         ];
     }
 
@@ -55,9 +46,9 @@ class ItemController extends Controller
     public function createItemAction(Request $request)
     {
         /** @var Item $item */
-        $item = new Item();
+        $store = new Store();
 
-        $form = $this->createForm(ItemFormType::class, $item);
+        $form = $this->createForm(ItemFormType::class, $store);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -117,7 +108,7 @@ class ItemController extends Controller
 
         /** @var Item $item */
         $item = $this->getItemRepository()->find($id);
-        $form = $this->createDeleteForm();
+        $form = $this->createDeleteForm($item);
         if ($request->isMethod('DELETE')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
@@ -133,17 +124,24 @@ class ItemController extends Controller
         }
     }
 
-
-    public function createDeleteForm()
+    /**
+     * @param Item $item
+     * @return \Symfony\Component\Form\Form The form
+     */
+    public function createDeleteForm(Item $item)
     {
-        return $this->get('form.factory')->createNamed('admin_item');
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('orderentry_admin_item_delete', ['id' => $item->getId()]))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 
     /**
-     * @return ItemRepository
+     * @return StoreRepository
      */
-    public function getItemRepository()
+    public function getStoreRepository()
     {
-        return $this->getDoctrine()->getRepository(Item::class);
+        return $this->getDoctrine()->getRepository(Store::class);
     }
 }

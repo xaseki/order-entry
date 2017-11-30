@@ -1,1 +1,13 @@
-Hello World!
+{% extends "AdminBundle::admin.html.twig" %}
+
+{% block title %}管理画面{% endblock %}
+
+{% set current_page="home" %}
+
+{% block body %}
+    <div class="block-header">
+        <h2>Dashboard</h2>
+    </div>
+
+
+{% endblock body %}
