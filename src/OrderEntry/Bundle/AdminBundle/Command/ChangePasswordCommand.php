@@ -2,6 +2,7 @@
 
 namespace OrderEntry\Bundle\AdminBundle\Command;
 
+use OrderEntry\Bundle\AdminBundle\Security\AdminUserManipulator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +19,7 @@ class ChangePasswordCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('order:admin:change-password')
+            ->setName('order-entry:admin:change-password')
             ->setDescription('Change the password of a user.')
             ->setDefinition(array(
                 new InputArgument('username', InputArgument::REQUIRED, 'The username'),

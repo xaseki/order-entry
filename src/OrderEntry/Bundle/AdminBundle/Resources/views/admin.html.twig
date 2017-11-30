@@ -26,13 +26,13 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {#<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>#}
+    {#<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>#}
 
     <script src="{{ asset("assets/vendor/adminbsb-materialdesign/plugins/jquery/jquery.min.js") }}"></script>
 </head>
 
-<body class="theme-teal">
+<body class="theme-red">
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
@@ -71,7 +71,7 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="{{ path("xearts_ashioku_admin_default_index") }}">ASHIBA AUCTIONS</a>
+            <a class="navbar-brand" href="{{ path("orderentry_admin_default_index") }}">Order Entry</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -113,10 +113,10 @@
             <div class="menu">
 
 
-            {{ knp_menu_render('admin_main', {template:"XeartsAshiokuAdminBundle::menu.html.twig"}) }}
+            {{ knp_menu_render('admin_main', {template:"AdminBundle::menu.html.twig"}) }}
 
 
-            </div>
+        </div>
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
@@ -180,7 +180,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="align-right">
-            {{ knp_menu_render('admin_main', {template:"XeartsAshiokuAdminBundle::menu_breadcrumbs.html.twig"}) }}
+            {#{{ knp_menu_render('admin_main', {template:"XeartsAshiokuAdminBundle::menu_breadcrumbs.html.twig"}) }}#}
         </div>
 
         {% if app.session.flashBag.has('error') %}

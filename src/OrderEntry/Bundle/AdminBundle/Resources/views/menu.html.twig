@@ -1,0 +1,19 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block linkElement %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>{{ block('icon') }}
+        {% if item.level>1 %}
+            {{ block('label') }}
+        {% else %}
+            <span>{{ block('label') }}</span>
+        {% endif %}
+    </a>
+{% endblock %}
+
+{% block spanElement %}{% import 'knp_menu.html.twig' as knp_menu %}<span{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('icon') }}<span>{{ block('label') }}</span></span>{% endblock %}
+
+
+{% block icon %}
+    {% if item.getExtra('icon') %}<i class="material-icons">{{ item.getExtra('icon') }}</i>{% endif %}
+{% endblock %}
