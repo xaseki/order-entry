@@ -180,7 +180,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="align-right">
-            {#{{ knp_menu_render('admin_main', {template:"XeartsAshiokuAdminBundle::menu_breadcrumbs.html.twig"}) }}#}
+            {{ knp_menu_render('admin_main', {template:"AdminBundle::menu_breadcrumbs.html.twig"}) }}
         </div>
 
         {% if app.session.flashBag.has('error') %}

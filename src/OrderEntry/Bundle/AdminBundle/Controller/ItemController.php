@@ -3,13 +3,13 @@
 namespace OrderEntry\Bundle\AdminBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
+use OrderEntry\Bundle\AppBundle\Entity\Item;
 use OrderEntry\Bundle\AppBundle\Repository\ItemRepository;
 use OrderEntry\Bundle\AdminBundle\Form\Type\ItemFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use OrderEntry\Bundle\AppBundle\Entity\Item;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use OrderEntry\Bundle\AppBundle\Entity\ItemCategory;
 use Symfony\Component\HttpFoundation\Request;
 /**
  * Class Item
@@ -40,7 +40,6 @@ class ItemController extends Controller
         $item = $qb->getQuery()->getResult();
 
 
-
         return [
             'item' => $item,
             'keyword' => $keyword,
@@ -51,8 +50,9 @@ class ItemController extends Controller
      * @Route("/create")
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @Template()
      */
-    public function createItemAction(Request $request)
+    public function createAction(Request $request)
     {
         /** @var Item $item */
         $item = new Item();
@@ -80,6 +80,7 @@ class ItemController extends Controller
      * @Route("/{id}/edit")
      * @param Item $item
      * @param Request $request
+     * @Template()
      */
     public function editAction(Item $item, Request $request)
     {
@@ -115,22 +116,19 @@ class ItemController extends Controller
             'html' => '',
         ];
 
-        /** @var Item $item */
+        /** @var ItemCategory $item */
         $item = $this->getItemRepository()->find($id);
         $form = $this->createDeleteForm();
-        if ($request->isMethod('DELETE')) {
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($item);
                 $em->flush();
+                $this->addFlash('', 'アイテムを削除しました');
 
-
-            } else {
-                $request['success'] = false;
-                $request['message'] = 'アイテムの削除に失敗しました。';
-            }
         }
+
+        return $this->redirectToRoute('orderentry_admin_item_index');
     }
 
 

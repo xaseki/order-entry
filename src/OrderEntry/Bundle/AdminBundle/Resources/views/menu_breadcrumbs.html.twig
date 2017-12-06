@@ -1,0 +1,40 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block list %}
+    {% import 'knp_menu.html.twig' as macros %}
+
+    {% if item.hasChildren and options.depth is not same as(0) and item.displayChildren %}
+        {% if item.level<1 %}
+        <ol class="breadcrumb align-right">
+            {{ block('children') }}
+        </ol>
+        {% else %}
+            {{ block('children') }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block item %}
+    {% import 'knp_menu.html.twig' as macros %}
+    {% if item.name=='Home' or matcher.isCurrent(item) or matcher.isAncestor(item) %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block linkElement %}
+    {% import 'knp_menu.html.twig' as knp_menu %}
+    <a href="{{ item.uri }}"{{ knp_menu.attributes(item.linkAttributes) }}>{{ block('icon') }}
+        {% if item.level>1 %}
+            {{ block('label') }}
+        {% else %}
+            <span>{{ block('label') }}</span>
+        {% endif %}
+    </a>
+{% endblock %}
+
+{% block spanElement %}{% import 'knp_menu.html.twig' as knp_menu %}<span{{ knp_menu.attributes(item.labelAttributes) }}>{{ block('icon') }}<span>{{ block('label') }}</span></span>{% endblock %}
+
+
+{% block icon %}
+    {% if item.getExtra('icon') %}<i class="material-icons">{{ item.getExtra('icon') }}</i>{% endif %}
+{% endblock %}

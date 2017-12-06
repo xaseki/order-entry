@@ -30,8 +30,31 @@ class ItemCategory
      * @Assert\NotBlank(
      *     message="名前を入力してください"
      * )
+     * @Assert\Length(
+     *     min="1",
+     *     minMessage="カテゴリー名は{{ limit }}文字以上でご記入ください",
+     *     max="50",
+     *     maxMessage="カテゴリー名は{{ limit }}文字以下でご記入ください"
+     * )
      */
     private $name;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", unique=true, nullable=false)
+     * @Assert\NotBlank(message="スラッグを入力してください")
+     * @Assert\Length(
+     *     min="2",
+     *     minMessage="スラッグは{{ limit }}文字以上で入力してください",
+     *     max="50",
+     *     maxMessage="スラッグは{{ limit }}文字以下で入力してください"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[a-z0-9-_]{2,}$/",
+     *     message="スラッグは半角英数字で入力してください"
+     * )
+     */
+    private $slug;
 
     /**
      * @var \DateTime
@@ -82,6 +105,23 @@ class ItemCategory
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
 
     /**
      * @return mixed
