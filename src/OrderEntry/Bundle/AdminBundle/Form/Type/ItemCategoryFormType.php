@@ -15,7 +15,12 @@ class ItemCategoryFormType extends AbstractType
             ->add('name', TextType::class, array(
                 'label' => 'カテゴリー名',
                 'required' => true,
-            ));
+            ))
+            ->add('slug', TextType::class,array(
+                'label' => 'スラッグ',
+                'required' => true,
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -30,8 +35,4 @@ class ItemCategoryFormType extends AbstractType
         return 'order_entry_item_category';
     }
 
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

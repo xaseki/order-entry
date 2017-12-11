@@ -41,6 +41,8 @@ class MenuBuilder
         ]);
 
         $this->buildMain($menu);
+        $this->buildContents($menu);
+
 
         return $menu;
     }
@@ -69,5 +71,29 @@ class MenuBuilder
                 'linkAttributes' => ['class' => 'menu-toggle'],
             ])
         ;
+    }
+
+    private function buildContents(ItemInterface $menu)
+    {
+
+
+        $menu->addChild('Contents', [
+            'attributes' => ['class' => 'header'],
+        ])
+            ->setExtra('icon', 'local_drink')
+        ;
+
+        $pageMenu = $menu
+            ->addChild('アイテム管理', [
+                'uri' => 'javascript:void(0)',
+                'childrenAttributes' => ['class' => 'ml-menu'],
+                'linkAttributes' => ['class' => 'menu-toggle']
+            ])
+            ->setExtra('icon', 'description')
+            ->setExtra('currentRoutes', ['orderentry_admin_item_edit'])
+        ;
+        $pageMenu->addChild('アイテム一覧', ['route' => 'orderentry_admin_item_index']);
+        $pageMenu->addChild('アイテム新規作成', ['route' => 'orderentry_admin_item_create']);
+
     }
 }

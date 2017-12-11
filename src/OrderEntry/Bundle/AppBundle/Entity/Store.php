@@ -26,6 +26,7 @@ class Store
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="店舗名を入力してください")
      * @Assert\Length(
      *     min="1",
      *     minMessage="店舗名は{limit}文字以上で入力してください"
@@ -36,27 +37,39 @@ class Store
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="スラッグを入力してください")
+     * @Assert\Length(
+     *     min="2",
+     *     minMessage="スラッグは{{ limit }}文字以上で入力してください",
+     *     max="50",
+     *     maxMessage="スラッグは{{ limit }}文字以下で入力してください"
+     * )
+     * @Assert\Regex(
+     *     pattern="/^[a-z0-9-_]{2,}$/",
+     *     message="スラッグは半角英数字で入力してください"
+     * )
      */
     private $slug;
 
     /**
-     * @var Item
-     * @ORM\ManyToOne(targetEntity="Item")
+     * @var ItemCategory
+     * @ORM\ManyToOne(targetEntity="ItemCategory")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(name="item_id", referencedColumnName="id")
      * })
+     *
      */
     private $item;
 
     /**
-     * Many Users have Many Groups.
-     * @ORM\ManyToMany(targetEntity="User")
-     * @ORM\JoinTable(name="stores_users",
-     *      joinColumns={@ORM\JoinColumn(name="store_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
-     *      )
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
-    private $users;
+    private $user;
+
 
     /**
      * @var \DateTime
@@ -78,11 +91,6 @@ class Store
     public function getId()
     {
         return $this->id;
-    }
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
     }
 
     /**
@@ -126,7 +134,7 @@ class Store
     }
 
     /**
-     * @return Item
+     * @return ItemCategory
      */
     public function getItem()
     {
@@ -134,9 +142,9 @@ class Store
     }
 
     /**
-     * @param Item $item
+     * @param ItemCategory $item
      */
-    public function setItem(Item $item)
+    public function setItem(ItemCategory $item)
     {
         $this->item = $item;
     }

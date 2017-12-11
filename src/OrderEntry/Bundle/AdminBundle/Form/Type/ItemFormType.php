@@ -1,7 +1,9 @@
 <?php
+
 namespace OrderEntry\Bundle\AdminBundle\Form\Type;
 
 use OrderEntry\Bundle\AppBundle\Entity\Item;
+use OrderEntry\Bundle\AppBundle\Entity\ItemCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,7 +23,7 @@ class ItemFormType extends AbstractType
                 'label'=> '価格',
                 'required' => true
             ))
-            ->add('catefoies', null, array(
+            ->add('category', null, array(
                 'label' => 'カテゴリー',
                 'required' => false
             ));
@@ -29,9 +31,7 @@ class ItemFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => Item::class,
-        ));
+
     }
 
     public function getBlockPrefix()
@@ -39,8 +39,4 @@ class ItemFormType extends AbstractType
         return 'order_entry_item';
     }
 
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 }

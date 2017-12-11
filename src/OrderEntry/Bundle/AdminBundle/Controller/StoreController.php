@@ -9,7 +9,7 @@ use OrderEntry\Bundle\AppBundle\Repository\StoreRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use OrderEntry\Bundle\AppBundle\Entity\Item;
+use OrderEntry\Bundle\AppBundle\Entity\ItemCategory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 /**
@@ -45,7 +45,7 @@ class StoreController extends Controller
      */
     public function createItemAction(Request $request)
     {
-        /** @var Item $item */
+        /** @var ItemCategory $item */
         $store = new Store();
 
         $form = $this->createForm(ItemFormType::class, $store);
@@ -69,10 +69,10 @@ class StoreController extends Controller
 
     /**
      * @Route("/{id}/edit")
-     * @param Item $item
+     * @param ItemCategory $item
      * @param Request $request
      */
-    public function editAction(Item $item, Request $request)
+    public function editAction(ItemCategory $item, Request $request)
     {
         $form = $this->createForm(ItemFormType::class, $item);
 
@@ -106,7 +106,7 @@ class StoreController extends Controller
             'html' => '',
         ];
 
-        /** @var Item $item */
+        /** @var ItemCategory $item */
         $item = $this->getItemRepository()->find($id);
         $form = $this->createDeleteForm($item);
         if ($request->isMethod('DELETE')) {
@@ -125,10 +125,10 @@ class StoreController extends Controller
     }
 
     /**
-     * @param Item $item
+     * @param ItemCategory $item
      * @return \Symfony\Component\Form\Form The form
      */
-    public function createDeleteForm(Item $item)
+    public function createDeleteForm(ItemCategory $item)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('orderentry_admin_item_delete', ['id' => $item->getId()]))

@@ -1,0 +1,68 @@
+{% extends "AdminBundle::admin.html.twig" %}
+
+{% block title %}アイテム管理 アイテム作成{% endblock %}
+
+{% block body %}
+
+    <div class="block-header">
+        <h2>アイテム管理</h2>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>アイテム作成</h2>
+                </div>
+                <div class="body">
+
+                    {{ form_start(form, {'method': 'post', 'action': path('orderentry_admin_item_create'), 'attr': {'class': 'admin_item_create'} })}}
+
+                    {#<div class="col-sm-offset-1 col-sm-10">#}
+                    {#<ul class="admin-flow-list">#}
+                    {#{% for photo in item.photos %}#}
+                    {#<li class="admin-flow-file">#}
+                    {#<img class="admin-flow-file-preview" src="{{ vich_uploader_asset(photo, 'imageFile') }}" width="150" />#}
+                    {#<span class="admin-flow-file-delete" data-id="{{ photo.id }}"><a href="#">×</a></span>#}
+                    {#</li>#}
+                    {#{% endfor %}#}
+                    {#</ul>#}
+                    {#<div class="text-center">#}
+                    {#<div class="flow-drop" ondragenter="jQuery(this).addClass('flow-dragover');" ondragend="jQuery(this).removeClass('flow-dragover');" ondrop="jQuery(this).removeClass('flow-dragover');">#}
+                    {#<a class="flow-browse-image"><u>写真を選択</u></a>#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#{{ form_widget(form.photos) }}#}
+                    {#</div>#}
+
+
+                        {{ form_row(form.name, { 'attr': {'class': 'input-field'} }) }}
+                        {{ form_row(form.price) }}
+                        {{ form_row(form.category) }}
+
+                    {{ form_rest(form) }}
+
+                    <div class="text-center">
+                        <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                    </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+  {% javascripts
+  "assets/vendor/flow.js/dist/flow.min.js"
+  %}
+    <script src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+
+{% endblock %}

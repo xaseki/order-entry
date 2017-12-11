@@ -37,7 +37,7 @@ class Item
      * @ORM\ManyToOne(targetEntity="ItemCategory")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $categories;
+    private $category;
     /**
      * @var integer
      * @ORM\Column(name="price", type="integer", nullable=false)
@@ -100,18 +100,18 @@ class Item
     /**
      * @return mixed
      */
-    public function getCategories()
+    public function getCategory()
     {
-        return $this->categories;
+        return $this->category;
     }
 
     /**
-     * @param mixed $categories
+     * @param mixed $category
      * @return $this
      */
-    public function setCategories($categories)
+    public function setCategory($category)
     {
-        $this->categories = $categories;
+        $this->category = $category;
         return $this;
     }
 
