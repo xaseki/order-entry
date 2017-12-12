@@ -1,0 +1,71 @@
+{% extends "AdminBundle::admin.html.twig" %}
+
+{% block title %}カテゴリー管理{% endblock %}
+
+{% set current_page="page" %}
+{% set current_sub_page="index" %}
+
+
+
+
+{% block body %}
+    <div class="block-header">
+        <h2>カテゴリー管理</h2>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h3>
+                        カテゴリー一覧
+                    </h3>
+                </div>
+
+                <div class="body table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>カテゴリー名</th>
+                            <th>スラッグ</th>
+                            <th>編集</th>
+                        </tr>
+                        </thead>
+
+
+                        <tbody>
+                        {# @var itemCategory \Xearts\Ashioku\Bundle\AppBundle\Entity\ItemCategory #}
+                        {% for itemCategory in pagination %}
+                            <tr>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.slug }}</td>
+                                <td>
+
+                                    <span class="pull-left">
+                                    <a href="{{ path('orderentry_admin_item_edit', {"id":item.id}) }}" class="btn btn-primary btn-md waves-effect">編集</a>
+                                        &nbsp;
+                                    </span>
+                                    <form class="pull-left" action="{{ path('orderentry_admin_item_delete', {id:item.id}) }}" method="post">
+                                        <input type="hidden" name="{{ form._token.vars.full_name }}" value="{{ form._token.vars.value }}">
+                                        <button class="btn btn-danger btn-md waves-effect" onclick="return confirm('この操作は取り消しできませんが、本当に削除しますか？')">削除</button>
+                                        &nbsp;
+                                    </form>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="pagination-wrapper">
+                    {{ knp_pagination_render(pagination, 'my_pagination.twig') }}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
