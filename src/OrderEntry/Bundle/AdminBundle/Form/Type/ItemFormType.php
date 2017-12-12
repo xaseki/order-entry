@@ -17,11 +17,18 @@ class ItemFormType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'label' => '名前',
+                'label_attr' => array(
+                    'class' => 'form-label'
+                ),
                 'required' => true,
             ))
             ->add('price', MoneyType::class, array(
                 'label'=> '価格',
-                'required' => true
+                'label_attr' => array(
+                    'class' => 'form-label'
+                ),
+                'required' => true,
+                'currency' => false,
             ))
             ->add('category', null, array(
                 'label' => 'カテゴリー',

@@ -26,7 +26,7 @@ class Item
 
     /**
      * @var string
-     * @ORM\Column(name="item", type="string", nullable=false)
+     * @ORM\Column(name="name", type="string", nullable=false)
      * @Assert\NotBlank(
      *     message="名前を入力してください"
      * )

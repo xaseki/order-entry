@@ -17,21 +17,25 @@
                 </div>
                 <div class="body">
 
-                  {{ form_start(form, {'method': 'post', 'action': path('admin_item_edit', {"id":item.id}), 'attr': {'class': 'admin_item_edit'}}) }}
+                    {{ form_start(form, {'method': 'post', 'action': path('admin_item_edit', {"id":item.id}), 'attr': {'class': 'admin_item_edit'}}) }}
+                    <div class="row">
+                        <div class="input-field col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="input-field col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            {{ form_row(form.price) }}
+                        </div>
+                        <div class="input-field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            {{ form_row(form.category) }}
+                        </div>
 
-                  {{ form_row(form.name) }}
-                  {{ form_row(form.price) }}
-                  {{ form_row(form.category) }}
+                        {{ form_rest(form) }}
 
-
-                    {{ form_rest(form) }}
-
-                    <div class="text-center">
-                        <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                        <div class="text-center">
+                            <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                        </div>
                     </div>
-
                     {{ form_end(form) }}
-
 
                 </div>
             </div>

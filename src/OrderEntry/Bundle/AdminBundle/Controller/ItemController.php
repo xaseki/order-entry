@@ -24,8 +24,13 @@ class ItemController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $qb = $this->getItemRepository()->createQueryBuilder('i')
-            ->orderBy('id', 'desc');
+        /** @var ItemRepository $repository */
+        $repository = $this->getItemRepository();
+
+        $qb = $repository->createQueryBuilder('i')
+            ->orderBy('i.created', 'DESC')
+        ;
+
 
         $keyword = $request->get('q', '');
         if ($keyword) {
@@ -37,11 +42,15 @@ class ItemController extends Controller
                 ))->setParameter('keyword', '%' . $keyword .  '%');
         }
 
-        $item = $qb->getQuery()->getResult();
-
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1)/*page number*/,
+            30/*limit per page*/
+        );
 
         return [
-            'item' => $item,
+            'pagination' => $pagination,
             'keyword' => $keyword,
         ];
     }

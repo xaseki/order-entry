@@ -1,6 +1,6 @@
 {% extends "AdminBundle::admin.html.twig" %}
 
-{% block title %}カテゴリー管理{% endblock %}
+{% block title %}アイテム管理{% endblock %}
 
 {% set current_page="page" %}
 {% set current_sub_page="index" %}
@@ -10,7 +10,7 @@
 
 {% block body %}
     <div class="block-header">
-        <h2>カテゴリー管理</h2>
+        <h2>アイテム管理</h2>
     </div>
 
     <div class="row clearfix">
@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="header">
                     <h3>
-                        カテゴリー一覧
+                        アイテム一覧
                     </h3>
                 </div>
 
@@ -26,19 +26,21 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>カテゴリー名</th>
-                            <th>スラッグ</th>
+                            <th>名前</th>
+                            <th>価格</th>
+                            <th>カテゴリ</th>
                             <th>編集</th>
                         </tr>
                         </thead>
 
 
                         <tbody>
-                        {# @var itemCategory \Xearts\Ashioku\Bundle\AppBundle\Entity\ItemCategory #}
-                        {% for itemCategory in pagination %}
+                        {# @var itemCategory \Xearts\Ashioku\Bundle\AppBundle\Entity\Item #}
+                        {% for item in pagination %}
                             <tr>
                                 <td>{{ item.name }}</td>
-                                <td>{{ item.slug }}</td>
+                                <td>{{ item.price }}</td>
+                                <td>{{ item.category }}</td>
                                 <td>
 
                                     <span class="pull-left">
@@ -60,9 +62,8 @@
                 </div>
 
                 <div class="pagination-wrapper">
-                    {{ knp_pagination_render(pagination, 'my_pagination.twig') }}
+                    {#{{ knp_pagination_render(pagination, '@') }}#}
                 </div>
-
 
             </div>
         </div>

@@ -14,10 +14,16 @@ class ItemCategoryFormType extends AbstractType
         $builder
             ->add('name', TextType::class, array(
                 'label' => 'カテゴリー名',
+                'label_attr' => array(
+                    'class' => 'form-label'
+                ),
                 'required' => true,
             ))
             ->add('slug', TextType::class,array(
                 'label' => 'スラッグ',
+                'label_attr' => array(
+                    'class' => 'form-label'
+                ),
                 'required' => true,
             ))
         ;
@@ -32,7 +38,7 @@ class ItemCategoryFormType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'order_entry_item_category';
+        return 'order_entry_admin_item_category';
     }
 
 }
