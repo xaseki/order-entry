@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 /**
- * Class Item
+ * Class ItemCategory
  * @package OrderEntry\Bundle\AdminBundle\Controller
  * @Route("/item/category")
  */
@@ -26,6 +26,7 @@ class ItemCategoryController extends Controller
      */
     public function indexAction(Request $request)
     {
+
         $qb = $this->getItemCategoryRepository()->createQueryBuilder('ic');
 
         /** @var Paginator $paginator */
@@ -36,19 +37,20 @@ class ItemCategoryController extends Controller
             20
         );
 
-        return [
-            'pagination' => $pagination
-        ];
+        $form = $this->createDeleteForm();
+
+        return $this->render('orderentry_admin_itemcategory_index', [
+            'pagination' => $pagination,
+            'form' => $form->createView(),
+        ]);
 
     }
 
     /**
      * @Route("/create")
      * @param Request $request
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     * @Template()
      */
-    public function createItemAction(Request $request)
+    public function createAction(Request $request)
     {
         /** @var ItemCategory $item */
         $itemCategory = new ItemCategory();
@@ -62,20 +64,20 @@ class ItemCategoryController extends Controller
                 $em->persist($itemCategory);
                 $em->flush();
                 $this->addFlash('success', 'アイテムカテゴリーを作成しました。');
-                return $this->redirectToRoute('orderentry_admin_itemcategory_index');
+                return $this->redirectToRoute('orderentry_admin_itemcategory_create');
 
             }
         }
-        return [
-            'form' => $form->createView(),
-        ];
+        return $this->render('orderentry_admin_itemcategory_edit',[
+//            'id' => $itemCategory->getId(),
+//            'form' => $form->createView(),
+        ]);
     }
 
     /**
      * @Route("/{id}/edit")
      * @param ItemCategory $itemCategory
      * @param Request $request
-     * @Template()
      */
     public function editAction(ItemCategory $itemCategory, Request $request)
     {
@@ -88,14 +90,14 @@ class ItemCategoryController extends Controller
                 $em->persist($itemCategory);
                 $em->flush();
 
-                $this->addFlash('success', 'アイテムを編集しました。');
-                return $this->redirectToRoute('orderentry_admin_item_edit', ['id' => $itemCategory->getId()]);
+                $this->addFlash('success', 'アイテムカテゴリーを編集しました。');
+                return $this->redirectToRoute('orderentry_admin_itemcategory_edit', ['id' => $itemCategory->getId()]);
             }
         }
-        return [
+        return $this->render('orderentry_admin_itemcategory_index',[
             'form' => $form->createView(),
-            'item' => $itemCategory,
-        ];
+            'itemCategory' => $itemCategory,
+        ]);
     }
 
     /**
@@ -119,14 +121,13 @@ class ItemCategoryController extends Controller
     }
 
 
+
     public function createDeleteForm()
     {
-        return $this->get('form.factory')->createNamed('admin_item_delete');
+        return $this->get('form.factory')->createNamed('admin_item_category_delete');
     }
 
-    /**
-     * @return ItemCategoryRepository
-     */
+
     public function getItemCategoryRepository()
     {
         return $this->getDoctrine()->getRepository(ItemCategory::class);

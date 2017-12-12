@@ -1,28 +1,27 @@
-{% extends "XeartsAshiokuAdminBundle::admin.html.twig" %}
+{% extends "AdminBundle::admin.html.twig" %}
 
-{% block title %}出品管理 出品情報編集{% endblock %}
+{% block title %}アイテムカテゴリー管理 アイテムカテゴリー作成{% endblock %}
 
 {% block body %}
-  {% form_theme form '@XeartsAshiokuAdmin/Form/layout.html.twig' %}
 
     <div class="block-header">
-        <h2>出品管理</h2>
+        <h2>アイテムカテゴリー管理</h2>
     </div>
 
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <h2>出品情報編集</h2>
+                    <h2>アイテムカテゴリー作成</h2>
                 </div>
                 <div class="body">
 
-                  {{ form_start(form, {'method': 'post', 'action': path('admin_item_edit', {"id":item.id}), 'attr': {'class': 'admin_item_edit'}}) }}
+                    {{ form_start(form, {'method': 'post', 'action': path('orderentry_admin_itemcategory_createitem'), 'attr': {'class': 'admin_item_category_create'} })}}
 
-                  {{ form_row(form.name) }}
-                  {{ form_row(form.price) }}
-                  {{ form_row(form.category) }}
 
+                        {{ form_row(form.name}) }}
+                        {{ form_row(form.price) }}
+                        {{ form_row(form.category) }}
 
                     {{ form_rest(form) }}
 
@@ -31,7 +30,6 @@
                     </div>
 
                     {{ form_end(form) }}
-
 
                 </div>
             </div>
@@ -43,6 +41,10 @@
 {% endblock %}
 
 {% block javascripts %}
+{{ parent() }}
+  {% javascripts
+  "assets/vendor/flow.js/dist/flow.min.js"
+  %}
     <script src="{{ asset_url }}"></script>
   {% endjavascripts %}
 

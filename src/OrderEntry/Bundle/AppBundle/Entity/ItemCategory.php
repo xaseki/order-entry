@@ -109,7 +109,7 @@ class ItemCategory
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getSlug()
     {
         return $this->slug;
     }
@@ -117,7 +117,7 @@ class ItemCategory
     /**
      * @param string $slug
      */
-    public function setSlug(string $slug): void
+    public function setSlug(string $slug)
     {
         $this->slug = $slug;
     }
