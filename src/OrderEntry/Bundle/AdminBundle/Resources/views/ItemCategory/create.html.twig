@@ -16,12 +16,7 @@
                 </div>
                 <div class="body">
 
-                    {{ form_start(form, {'method': 'post', 'action': path('orderentry_admin_itemcategory_createitem'), 'attr': {'class': 'admin_item_category_create'} })}}
-
-
-                        {{ form_row(form.name}) }}
-                        {{ form_row(form.price) }}
-                        {{ form_row(form.category) }}
+                    {{ form_start(form, {'method': 'post', 'action': path('orderentry_admin_itemcategory_create'), 'attr': {'class': 'admin_item_category_create'} })}}
 
                     {{ form_rest(form) }}
 

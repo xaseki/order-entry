@@ -1,0 +1,46 @@
+{% extends "AdminBundle::admin.html.twig" %}
+
+{% block title %}アイテムカテゴリー管理 アイテムカテゴリー編集{% endblock %}
+
+{% block body %}
+
+    <div class="block-header">
+        <h2>アイテムカテゴリー管理</h2>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>アイテムカテゴリー編集</h2>
+                </div>
+                <div class="body">
+
+                  {{ form_start(form, {'method': 'post', 'action': path('orderentry_admin_itemcategory_edit', {"id":itemCategory.id}), 'attr': {'class': 'admin_item_category_edit'}}) }}
+
+                    {{ form_rest(form) }}
+
+                    <div class="text-center">
+                        <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                    </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    "assets/vendor/flow.js/dist/flow.min.js"
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}

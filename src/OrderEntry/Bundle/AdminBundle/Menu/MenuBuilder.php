@@ -41,8 +41,8 @@ class MenuBuilder
         ]);
 
         $this->buildMain($menu);
-        $this->buildContents($menu);
-        $this->buildMaster(($menu));
+        $this->buildItem($menu);
+        $this->buildCategory(($menu));
 
 
         return $menu;
@@ -55,7 +55,7 @@ class MenuBuilder
         ]);
 
         $menu
-            ->addChild('Home', array('route' => 'orderentry_web_default_index'))
+            ->addChild('Home', array('route' => 'orderentry_admin_default_index'))
             ->setExtra('icon', 'home')
         ;
         $itemMenu = $menu->addChild('店舗管理', [
@@ -74,7 +74,7 @@ class MenuBuilder
         ;
     }
 
-    private function buildContents(ItemInterface $menu)
+    private function buildItem(ItemInterface $menu)
     {
 
 
@@ -97,7 +97,7 @@ class MenuBuilder
         $pageMenu->addChild('アイテム新規作成', ['route' => 'orderentry_admin_item_create']);
 
     }
-    private function buildMaster(ItemInterface $menu)
+    private function buildCategory(ItemInterface $menu)
     {
 
         $menu->addChild('カテゴリー管理', [
@@ -114,7 +114,7 @@ class MenuBuilder
             ->setExtra('currentRoutes', ['orderentry_admin_itemcategory_edit'])
         ;
         $categoryMenu->addChild('カテゴリー一覧', ['route' => 'orderentry_admin_itemcategory_index']);
-        $categoryMenu->addChild('カテゴリー新規作成', ['route' => 'orderentry_admin_itemcategory_createitem']);
+        $categoryMenu->addChild('カテゴリー新規作成', ['route' => 'orderentry_admin_itemcategory_create']);
 
     }
 }

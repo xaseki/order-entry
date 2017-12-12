@@ -46,7 +46,7 @@
                                         &nbsp;
                                     </span>
                                     <form class="pull-left" action="{{ path('orderentry_admin_itemcategory_delete', {id:itemCategory.id}) }}" method="post">
-                                        <input type="hidden" name="{{ form._token.vars.full_name }}" value="{{ form._token.vars.value }}">
+                                        {#<input type="hidden" name="{{ form._token.vars.full_name }}" value="{{ form._token.vars.value }}">#}
                                         <button class="btn btn-danger btn-md waves-effect" onclick="return confirm('この操作は取り消しできませんが、本当に削除しますか？')">削除</button>
                                         &nbsp;
                                     </form>
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="pagination-wrapper">
-                    {{ knp_pagination_render(pagination, 'my_pagination.twig') }}
+                    {{ knp_pagination_render(pagination, '') }}
                 </div>
 
 

@@ -27,28 +27,31 @@ class ItemCategoryController extends Controller
     public function indexAction(Request $request)
     {
 
-        $qb = $this->getItemCategoryRepository()->createQueryBuilder('ic');
+        /** @var ItemCategoryRepository $repository */
+        $repository = $this->getItemCategoryRepository();
 
-        /** @var Paginator $paginator */
-        $paginator = $this->get('knp_paginator');
+        $qb = $repository->createQueryBuilder('ic');
+
+        $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $qb,
-            $request->query->getInt('page', 1),
-            20
+            $request->query->getInt('page', 1)/*page number*/,
+            30/*limit per page*/
         );
 
         $form = $this->createDeleteForm();
 
-        return $this->render('orderentry_admin_itemcategory_index', [
+        return [
             'pagination' => $pagination,
-            'form' => $form->createView(),
-        ]);
+            'form' => $form,
+        ];
 
     }
 
     /**
      * @Route("/create")
      * @param Request $request
+     * @Template()
      */
     public function createAction(Request $request)
     {
@@ -64,24 +67,25 @@ class ItemCategoryController extends Controller
                 $em->persist($itemCategory);
                 $em->flush();
                 $this->addFlash('success', 'アイテムカテゴリーを作成しました。');
-                return $this->redirectToRoute('orderentry_admin_itemcategory_create');
+                return $this->redirectToRoute('orderentry_admin_itemcategory_index');
 
             }
         }
-        return $this->render('orderentry_admin_itemcategory_edit',[
-//            'id' => $itemCategory->getId(),
-//            'form' => $form->createView(),
-        ]);
+        return [
+            'id' => $itemCategory->getId(),
+            'form' => $form->createView(),
+        ];
     }
 
     /**
      * @Route("/{id}/edit")
      * @param ItemCategory $itemCategory
      * @param Request $request
+     * @Template()
      */
     public function editAction(ItemCategory $itemCategory, Request $request)
     {
-        $form = $this->createForm(ItemFormType::class, $itemCategory);
+        $form = $this->createForm(ItemCategoryFormType::class, $itemCategory);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
@@ -94,22 +98,22 @@ class ItemCategoryController extends Controller
                 return $this->redirectToRoute('orderentry_admin_itemcategory_edit', ['id' => $itemCategory->getId()]);
             }
         }
-        return $this->render('orderentry_admin_itemcategory_index',[
+        return [
             'form' => $form->createView(),
             'itemCategory' => $itemCategory,
-        ]);
+        ];
     }
 
     /**
-     * @Route("/{id}/delete")
+     * @param ItemCategory $itemCategory
      * @param Request $request
-     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route ("/{id}/delete")
      * @Method("POST")
      */
     public function deleteAction(ItemCategory $itemCategory ,Request $request)
     {
         $form = $this->createDeleteForm();
-        $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($itemCategory);
@@ -121,14 +125,13 @@ class ItemCategoryController extends Controller
     }
 
 
-
     public function createDeleteForm()
     {
-        return $this->get('form.factory')->createNamed('admin_item_category_delete');
+        return $this->get('form.factory')->createNamed('admin_item_category');
     }
 
 
-    public function getItemCategoryRepository()
+    private function getItemCategoryRepository()
     {
         return $this->getDoctrine()->getRepository(ItemCategory::class);
     }
