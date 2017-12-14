@@ -49,9 +49,15 @@ class ItemController extends Controller
             30/*limit per page*/
         );
 
+        $form = $this->createDeleteForm();
+//        echo '<pre>';
+//        var_dump($form);
+//        echo '</pre>';
+
         return [
             'pagination' => $pagination,
             'keyword' => $keyword,
+            'form' => $form->createview()
         ];
     }
 
